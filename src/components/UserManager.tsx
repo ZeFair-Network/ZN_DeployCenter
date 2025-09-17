@@ -240,8 +240,8 @@ export function UserManager() {
   const stats = getUserStats();
 
   return (
-    <div className="p-6 h-full overflow-hidden">
-      <div className="h-full flex flex-col">
+    <div className="p-6 h-full min-h-0 overflow-hidden">
+      <div className="h-full min-h-0 flex flex-col">
         {/* Статистика пользователей */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
@@ -282,13 +282,13 @@ export function UserManager() {
           ))}
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 flex-1 overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 flex-1 min-h-0">
           {/* Список пользователей */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="lg:col-span-2 bg-white/50 dark:bg-white/10 backdrop-blur-2xl border border-white/20 dark:border-white/10 rounded-3xl shadow-2xl flex flex-col relative overflow-hidden"
+            className="lg:col-span-2 bg-white/50 dark:bg-white/10 backdrop-blur-2xl border border-white/20 dark:border-white/10 rounded-3xl shadow-2xl flex flex-col relative min-h-0"
             style={{
               backdropFilter: 'blur(40px) saturate(200%)',
               WebkitBackdropFilter: 'blur(40px) saturate(200%)',
@@ -413,7 +413,7 @@ export function UserManager() {
             </div>
 
             {/* Список пользователей */}
-            <ScrollArea className="flex-1 p-6 scrollbar-glass">
+            <ScrollArea className="flex-1 min-h-0 p-6 scrollbar-glass">
               <div className="space-y-4">
                 {filteredUsers.map((user) => {
                   const roleInfo = roleConfig[user.role];
@@ -506,7 +506,7 @@ export function UserManager() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="bg-white/50 dark:bg-white/10 backdrop-blur-2xl border border-white/20 dark:border-white/10 rounded-3xl shadow-2xl flex flex-col relative overflow-hidden"
+            className="bg-white/50 dark:bg-white/10 backdrop-blur-2xl border border-white/20 dark:border-white/10 rounded-3xl shadow-2xl flex flex-col relative overflow-hidden min-h-0"
             style={{
               backdropFilter: 'blur(40px) saturate(200%)',
               WebkitBackdropFilter: 'blur(40px) saturate(200%)',
@@ -521,7 +521,7 @@ export function UserManager() {
               </h3>
             </div>
 
-            <ScrollArea className="flex-1 p-6 relative scrollbar-glass">
+            <ScrollArea className="flex-1 min-h-0 p-6 relative scrollbar-glass">
               {isEditMode ? (
                 <div className="space-y-4">
                   <Input

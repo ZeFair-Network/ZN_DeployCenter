@@ -169,10 +169,10 @@ tcp        0      0 0.0.0.0:443             0.0.0.0:*               LISTEN`;
         animate={{ 
           opacity: 1, 
           scale: 1,
-          height: isMinimized ? 60 : 'auto'
+          height: isMinimized ? 60 : '100%'
         }}
         transition={{ duration: 0.5 }}
-        className="bg-black/90 backdrop-blur-[20px] border border-black/20 rounded-2xl shadow-lg overflow-hidden h-full max-h-[calc(100vh-8rem)] flex flex-col"
+        className="bg-black/90 backdrop-blur-[20px] border border-black/20 rounded-2xl shadow-lg overflow-hidden h-full flex flex-col"
         style={{
           backdropFilter: 'blur(20px) saturate(180%)',
           WebkitBackdropFilter: 'blur(20px) saturate(180%)',

@@ -254,9 +254,9 @@ export function LogsViewer() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="p-6 h-full"
+      className="p-6 h-full min-h-0"
     >
-      <div className="flex flex-col h-full space-y-6">
+      <div className="flex flex-col h-full min-h-0 space-y-6">
         {/* Заголовок и статистика */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
@@ -326,7 +326,7 @@ export function LogsViewer() {
           </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 flex-1">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 flex-1 min-h-0">
           {/* Фильтры и настройки */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -406,7 +406,7 @@ export function LogsViewer() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:col-span-3 backdrop-blur-xl bg-white/40 dark:bg-white/10 border border-white/30 dark:border-white/20 rounded-2xl shadow-xl flex flex-col"
+            className="lg:col-span-3 backdrop-blur-xl bg-white/40 dark:bg-white/10 border border-white/30 dark:border-white/20 rounded-2xl shadow-xl flex flex-col min-h-0"
             style={{
               backdropFilter: 'blur(20px) saturate(180%)',
               WebkitBackdropFilter: 'blur(20px) saturate(180%)',
@@ -428,7 +428,7 @@ export function LogsViewer() {
               </div>
             </div>
 
-            <div className="flex-1 overflow-hidden">
+            <div className="flex-1 min-h-0 overflow-hidden">
               <ScrollArea className="h-full scrollbar-glass">
                 <div className="p-6 space-y-3">
                 {filteredLogs.map((log) => {
