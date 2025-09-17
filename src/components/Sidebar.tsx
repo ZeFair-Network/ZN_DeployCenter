@@ -99,9 +99,9 @@ export function Sidebar({ activeTab, onTabChange, collapsed, onToggleCollapse, i
               transition={{ delay: 0.3 }}
             >
               <h1 className="text-xl font-medium text-gray-900 dark:text-white">
-                Admin Panel
+                ZeFair Network
               </h1>
-              <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">Liquid Glass v2.0</p>
+              <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">Deploy Center v0.1.0b</p>
             </motion.div>
           )}
           <div className="flex items-center space-x-1">
@@ -113,14 +113,7 @@ export function Sidebar({ activeTab, onTabChange, collapsed, onToggleCollapse, i
             >
               {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </Button>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={onToggleCollapse}
-              className="w-8 h-8 p-0 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-white/30 dark:hover:bg-white/20 rounded-full flex-shrink-0"
-            >
-              {collapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
-            </Button>
+
           </div>
         </div>
       </motion.div>
@@ -208,39 +201,6 @@ export function Sidebar({ activeTab, onTabChange, collapsed, onToggleCollapse, i
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5 }}
       >
-        {!collapsed && (
-          <div className="p-4 bg-white/30 dark:bg-white/10 backdrop-blur-2xl rounded-2xl border border-white/20 dark:border-white/10 shadow-xl relative overflow-hidden"
-            style={{
-              backdropFilter: 'blur(20px) saturate(180%)',
-              WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-            }}
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent dark:from-white/10 pointer-events-none" />
-            <div className="relative">
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-gray-700 dark:text-gray-300 text-sm font-medium">Статус сервера</span>
-                <Badge className="bg-green-100/90 dark:bg-green-900/40 text-green-700 dark:text-green-400 border-green-200/50 dark:border-green-700/30 backdrop-blur-sm">
-                  Онлайн
-                </Badge>
-              </div>
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-600 dark:text-gray-400">CPU:</span>
-                  <span className="text-gray-900 dark:text-white font-medium">65%</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-600 dark:text-gray-400">RAM:</span>
-                  <span className="text-gray-900 dark:text-white font-medium">78%</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-600 dark:text-gray-400">Uptime:</span>
-                  <span className="text-gray-900 dark:text-white font-medium">15d 4h</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-        
         <motion.button
           className={`w-full group relative overflow-hidden rounded-2xl transition-all duration-300 ${
             collapsed ? 'p-3' : 'p-4'
