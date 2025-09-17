@@ -91,8 +91,9 @@ export default function App() {
         {/* Боковая панель */}
         <motion.div
           animate={{ width: sidebarCollapsed ? 80 : 280 }}
-          transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
-          className="h-full"
+          transition={{ duration: 0.25, ease: "easeInOut" }}
+          className="h-full flex-shrink-0"
+          style={{ overflow: 'hidden' }}
         >
           <Sidebar
             activeTab={activeTab}
@@ -105,16 +106,16 @@ export default function App() {
         </motion.div>
 
         {/* Основное содержимое */}
-        <div className="h-full overflow-hidden">
+        <div className="h-full overflow-hidden min-w-0">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
-              initial={{ opacity: 0, y: 12, scale: 0.98 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -12, scale: 0.98 }}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
               transition={{ 
-                duration: 0.3, 
-                ease: [0.23, 1, 0.32, 1]
+                duration: 0.2, 
+                ease: "easeInOut"
               }}
               className="h-full"
             >

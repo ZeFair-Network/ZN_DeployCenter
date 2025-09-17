@@ -287,7 +287,7 @@ export function FileManager() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="p-3 sm:p-6 h-full overflow-hidden"
+      className="p-3 sm:p-6 h-full min-h-0 overflow-hidden"
     >
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 sm:gap-6 h-full min-h-0">
         {/* Файловый браузер */}
@@ -403,7 +403,7 @@ export function FileManager() {
           </div>
 
           {/* Список файлов */}
-          <div className="flex-1 overflow-hidden">
+          <div className="flex-1 min-h-0 overflow-hidden">
             <ScrollArea className="h-full scrollbar-glass">
               <div className="p-4 sm:p-6 space-y-2">
                 {filteredFiles.map((file) => {
@@ -506,7 +506,7 @@ export function FileManager() {
             )}
           </div>
 
-          <div className="flex-1 p-4 sm:p-6 overflow-hidden">
+          <div className="flex-1 p-4 sm:p-6 min-h-0 overflow-hidden">
             {editingFile ? (
               <div className="h-full flex flex-col space-y-4 min-h-0">
                 <div className="flex-1 min-h-0">

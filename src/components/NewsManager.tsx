@@ -284,7 +284,7 @@ export function NewsManager() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="p-6 h-full overflow-hidden"
+      className="p-6 h-full min-h-0 overflow-hidden"
     >
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-full">
         {/* Список статей */}
@@ -292,7 +292,7 @@ export function NewsManager() {
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="lg:col-span-2 bg-white/50 dark:bg-white/10 backdrop-blur-2xl border border-white/20 dark:border-white/10 rounded-3xl shadow-2xl flex flex-col relative overflow-hidden"
+          className="lg:col-span-2 bg-white/50 dark:bg-white/10 backdrop-blur-2xl border border-white/20 dark:border-white/10 rounded-3xl shadow-2xl flex flex-col relative overflow-hidden min-h-0"
           style={{
             backdropFilter: 'blur(40px) saturate(200%)',
             WebkitBackdropFilter: 'blur(40px) saturate(200%)',
@@ -447,7 +447,7 @@ export function NewsManager() {
           </div>
 
           {/* Список статей */}
-          <div className="flex-1 overflow-hidden">
+          <div className="flex-1 min-h-0 overflow-hidden">
             <ScrollArea className="h-full scrollbar-glass">
               <div className="p-6 space-y-4">
                 {filteredArticles.map((article) => (
@@ -541,7 +541,7 @@ export function NewsManager() {
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="bg-white/50 dark:bg-white/10 backdrop-blur-2xl border border-white/20 dark:border-white/10 rounded-3xl shadow-2xl flex flex-col relative overflow-hidden"
+          className="bg-white/50 dark:bg-white/10 backdrop-blur-2xl border border-white/20 dark:border-white/10 rounded-3xl shadow-2xl flex flex-col relative overflow-hidden min-h-0"
           style={{
             backdropFilter: 'blur(40px) saturate(200%)',
             WebkitBackdropFilter: 'blur(40px) saturate(200%)',
@@ -573,7 +573,7 @@ export function NewsManager() {
             )}
           </div>
 
-          <div className="flex-1 overflow-hidden">
+          <div className="flex-1 min-h-0 overflow-hidden">
             <ScrollArea className="h-full scrollbar-glass">
               <div className="p-6">
                 {isEditMode ? (

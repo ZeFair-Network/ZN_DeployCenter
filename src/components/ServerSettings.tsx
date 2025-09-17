@@ -207,7 +207,7 @@ export function ServerSettings() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="p-6 h-full overflow-hidden"
+      className="p-6 h-full min-h-0 overflow-hidden"
     >
       <div className="flex flex-col h-full">
         {/* Заголовок и панель управления */}
@@ -278,7 +278,7 @@ export function ServerSettings() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="backdrop-blur-xl bg-white/40 dark:bg-white/10 border border-white/30 dark:border-white/20 rounded-2xl shadow-xl flex-1 overflow-hidden"
+          className="backdrop-blur-xl bg-white/40 dark:bg-white/10 border border-white/30 dark:border-white/20 rounded-2xl shadow-xl flex-1 min-h-0 overflow-hidden"
           style={{
             backdropFilter: 'blur(20px) saturate(180%)',
             WebkitBackdropFilter: 'blur(20px) saturate(180%)',
@@ -316,7 +316,7 @@ export function ServerSettings() {
               </TabsTrigger>
             </TabsList>
 
-            <div className="flex-1 overflow-hidden">
+            <div className="flex-1 min-h-0 overflow-hidden">
               <ScrollArea className="h-full scrollbar-glass">
                 <div className="p-6">
                   {/* Общие настройки */}

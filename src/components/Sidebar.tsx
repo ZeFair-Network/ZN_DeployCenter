@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { 
@@ -72,11 +72,8 @@ const menuItems = [
 
 export function Sidebar({ activeTab, onTabChange, collapsed, onToggleCollapse, isDarkMode, toggleTheme }: SidebarProps) {
   return (
-    <motion.div
-      initial={{ x: -300 }}
-      animate={{ x: 0 }}
-      transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
-      className="h-full bg-white/50 dark:bg-slate-900/50 backdrop-blur-2xl border-r border-white/10 dark:border-white/5 shadow-2xl flex flex-col relative"
+    <div
+      className="h-full min-h-0 bg-white/50 dark:bg-slate-900/50 backdrop-blur-2xl border-r border-white/10 dark:border-white/5 shadow-2xl flex flex-col relative"
       style={{
         backdropFilter: 'blur(40px) saturate(200%)',
         WebkitBackdropFilter: 'blur(40px) saturate(200%)',
@@ -84,27 +81,29 @@ export function Sidebar({ activeTab, onTabChange, collapsed, onToggleCollapse, i
     >
       {/* Glass overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-white/5 to-transparent dark:from-white/10 dark:via-white/5 dark:to-transparent pointer-events-none" />
+      
       {/* Заголовок */}
-      <motion.div 
-        className="relative p-6 border-b border-white/10 dark:border-white/5"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.2 }}
-      >
+      <div className="relative p-6 border-b border-white/10 dark:border-white/5">
         <div className="flex items-center justify-between">
-          {!collapsed && (
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3 }}
-            >
-              <h1 className="text-xl font-medium text-gray-900 dark:text-white">
-                Admin Panel
-              </h1>
-              <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">Liquid Glass v2.0</p>
-            </motion.div>
-          )}
-          <div className="flex items-center space-x-1">
+          <AnimatePresence mode="wait">
+            {!collapsed && (
+              <motion.div
+                key="header-content"
+                initial={{ opacity: 0, width: 0 }}
+                animate={{ opacity: 1, width: "auto" }}
+                exit={{ opacity: 0, width: 0 }}
+                transition={{ duration: 0.2, ease: "easeInOut" }}
+                className="overflow-hidden"
+              >
+                <h1 className="text-xl font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                  Admin Panel
+                </h1>
+                <p className="text-gray-600 dark:text-gray-400 text-sm mt-1 whitespace-nowrap">Liquid Glass v2.0</p>
+              </motion.div>
+            )}
+          </AnimatePresence>
+          
+          <div className="flex items-center space-x-1 ml-auto">
             <Button
               variant="ghost"
               size="sm"
@@ -123,142 +122,112 @@ export function Sidebar({ activeTab, onTabChange, collapsed, onToggleCollapse, i
             </Button>
           </div>
         </div>
-      </motion.div>
+      </div>
 
       {/* Навигационное меню */}
-      <div className="flex-1 p-6 space-y-3 relative overflow-hidden">
+      <div className="flex-1 min-h-0 p-6 space-y-3 relative overflow-hidden">
         <div className="space-y-3">
-          {menuItems.map((item, index) => {
+          {menuItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeTab === item.id;
             
             return (
-              <motion.div
-                key={item.id}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.1 + index * 0.05 }}
-              >
-                <motion.button
+              <div key={item.id}>
+                <button
                   onClick={() => onTabChange(item.id)}
-                  className={`w-full text-left transition-all duration-300 group relative overflow-hidden rounded-2xl ${
+                  className={`w-full text-left transition-all duration-200 group relative overflow-hidden rounded-2xl ${
                     collapsed ? 'p-3' : 'p-4'
-                  }`}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  } hover:scale-[1.02] active:scale-[0.98]`}
                 >
                   {/* Активный фон */}
                   {isActive && (
-                    <motion.div
-                      layoutId="activeTabBg"
+                    <div
                       className="absolute inset-0 bg-gradient-to-br from-blue-500/80 to-indigo-600/80 rounded-2xl shadow-xl"
                       style={{
                         backdropFilter: 'blur(20px) saturate(180%)',
                         WebkitBackdropFilter: 'blur(20px) saturate(180%)',
                       }}
-                      transition={{ type: "spring", bounce: 0.15, duration: 0.6 }}
                     />
                   )}
                   
                   {/* Hover фон */}
                   {!isActive && (
-                    <div className="absolute inset-0 bg-white/20 dark:bg-white/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute inset-0 bg-white/20 dark:bg-white/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
                   )}
                   
-                  <div className="relative flex items-center space-x-4 z-10">
-                    <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-300 ${
-                      isActive 
-                        ? 'bg-white/20 text-white shadow-lg' 
-                        : 'bg-white/30 dark:bg-white/20 text-gray-700 dark:text-gray-300 group-hover:bg-white/40 dark:group-hover:bg-white/30'
+                  <div className={`relative flex items-center z-10 ${collapsed ? 'justify-center' : 'space-x-4'}`}>
+                    <div className={`w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0 transition-all duration-200 ${
+                      collapsed 
+                        ? isActive
+                          ? 'bg-white/20 text-white shadow-lg border border-white/30'
+                          : 'bg-white/20 dark:bg-white/10 text-gray-700 dark:text-gray-300 group-hover:bg-white/30 dark:group-hover:bg-white/20 border border-white/20 dark:border-white/10'
+                        : isActive 
+                          ? 'bg-white/20 text-white shadow-lg' 
+                          : 'bg-white/30 dark:bg-white/20 text-gray-700 dark:text-gray-300 group-hover:bg-white/40 dark:group-hover:bg-white/30'
                     }`}>
                       <Icon className="w-6 h-6" />
                     </div>
                     
-                    {!collapsed && (
-                      <motion.div
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.2 }}
-                        className="flex-1"
-                      >
-                        <div className={`font-medium transition-colors ${
-                          isActive ? 'text-white' : 'text-gray-900 dark:text-white'
-                        }`}>
-                          {item.label}
-                        </div>
-                        <div className={`text-sm transition-colors ${
-                          isActive ? 'text-white/80' : 'text-gray-600 dark:text-gray-400'
-                        }`}>
-                          {item.description}
-                        </div>
-                      </motion.div>
-                    )}
+                    <AnimatePresence mode="wait">
+                      {!collapsed && (
+                        <motion.div
+                          key="menu-text"
+                          initial={{ opacity: 0, width: 0 }}
+                          animate={{ opacity: 1, width: "auto" }}
+                          exit={{ opacity: 0, width: 0 }}
+                          transition={{ duration: 0.15, ease: "easeInOut" }}
+                          className="flex-1 overflow-hidden"
+                        >
+                          <div className={`font-medium transition-colors whitespace-nowrap ${
+                            isActive ? 'text-white' : 'text-gray-900 dark:text-white'
+                          }`}>
+                            {item.label}
+                          </div>
+                          <div className={`text-sm transition-colors whitespace-nowrap ${
+                            isActive ? 'text-white/80' : 'text-gray-600 dark:text-gray-400'
+                          }`}>
+                            {item.description}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
-                </motion.button>
-              </motion.div>
+                </button>
+              </div>
             );
           })}
         </div>
       </div>
 
-      {/* Статус система и выход */}
-      <motion.div 
-        className="relative p-6 border-t border-white/10 dark:border-white/5 space-y-4"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5 }}
-      >
-        {!collapsed && (
-          <div className="p-4 bg-white/30 dark:bg-white/10 backdrop-blur-2xl rounded-2xl border border-white/20 dark:border-white/10 shadow-xl relative overflow-hidden"
-            style={{
-              backdropFilter: 'blur(20px) saturate(180%)',
-              WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-            }}
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent dark:from-white/10 pointer-events-none" />
-            <div className="relative">
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-gray-700 dark:text-gray-300 text-sm font-medium">Статус сервера</span>
-                <Badge className="bg-green-100/90 dark:bg-green-900/40 text-green-700 dark:text-green-400 border-green-200/50 dark:border-green-700/30 backdrop-blur-sm">
-                  Онлайн
-                </Badge>
-              </div>
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-600 dark:text-gray-400">CPU:</span>
-                  <span className="text-gray-900 dark:text-white font-medium">65%</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-600 dark:text-gray-400">RAM:</span>
-                  <span className="text-gray-900 dark:text-white font-medium">78%</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-600 dark:text-gray-400">Uptime:</span>
-                  <span className="text-gray-900 dark:text-white font-medium">15d 4h</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-        
-        <motion.button
-          className={`w-full group relative overflow-hidden rounded-2xl transition-all duration-300 ${
+      {/* Выход */}
+      <div className="relative p-6 border-t border-white/10 dark:border-white/5">
+        <button
+          className={`w-full group relative overflow-hidden rounded-2xl transition-all duration-200 ${
             collapsed ? 'p-3' : 'p-4'
-          }`}
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
+          } hover:scale-[1.02] active:scale-[0.98]`}
         >
-          <div className="absolute inset-0 bg-red-500/10 dark:bg-red-900/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-          <div className="relative flex items-center space-x-4">
-            <div className="w-12 h-12 rounded-2xl bg-red-100/80 dark:bg-red-900/30 flex items-center justify-center">
+          <div className="absolute inset-0 bg-red-500/10 dark:bg-red-900/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+          <div className={`relative flex items-center ${collapsed ? 'justify-center' : 'space-x-4'}`}>
+            <div className="w-12 h-12 rounded-2xl bg-red-100/80 dark:bg-red-900/30 flex items-center justify-center flex-shrink-0">
               <LogOut className="w-6 h-6 text-red-600 dark:text-red-400" />
             </div>
-            {!collapsed && (
-              <span className="text-red-600 dark:text-red-400 font-medium">Выйти</span>
-            )}
+            <AnimatePresence mode="wait">
+              {!collapsed && (
+                <motion.span
+                  key="logout-text"
+                  initial={{ opacity: 0, width: 0 }}
+                  animate={{ opacity: 1, width: "auto" }}
+                  exit={{ opacity: 0, width: 0 }}
+                  transition={{ duration: 0.15, ease: "easeInOut" }}
+                  className="text-red-600 dark:text-red-400 font-medium whitespace-nowrap overflow-hidden"
+                >
+                  Выйти
+                </motion.span>
+              )}
+            </AnimatePresence>
           </div>
-        </motion.button>
-      </motion.div>
-    </motion.div>
+        </button>
+      </div>
+    </div>
   );
 }
